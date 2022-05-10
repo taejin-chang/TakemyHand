@@ -1,0 +1,27 @@
+<%@page import="InteriorDTO.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<% 
+    
+    MemberDTO loginMember=(MemberDTO)session.getAttribute("loginMember");
+    
+    if(loginMember==null){
+    	String requestURI=request.getRequestURI();
+    	String queryString=request.getQueryString();
+    	System.out.println("requestURI = "+requestURI);
+    	System.out.println("queryString = "+queryString);
+    	System.out.println("requestURI+queryString = "+requestURI+"?"+queryString);
+    	
+  
+    	if(queryString==null || queryString.equals("")) {
+			queryString="";	
+		}else {
+			queryString="?"+queryString;
+		}
+    	session.setAttribute("url", requestURI+queryString);
+    	
+    	response.sendRedirect("login.jsp");
+    	
+    }
+  %>
